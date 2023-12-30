@@ -72,8 +72,9 @@ const CreateListing = () => {
             if(data.success === false){
                 setError(data.message);
             }
-            
-            navigate(`/listing/${params.listingId}}`)
+            setError(false)
+            navigate(`/listing/${params.listingId}`)
+            console.log(params.listingId)
         } catch (error) {
             setError(error.message)
             setLoading(false);
