@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import {FaSearch} from 'react-icons/fa'
-import { Link,useNavigate } from 'react-router-dom'
+import { Link,useNavigate,useLocation } from 'react-router-dom'
 import { useSelector } from 'react-redux'
 
 export default function Header() {
@@ -8,6 +8,7 @@ export default function Header() {
     const {currentUser} = useSelector(state=>state.user);
     const [searchTerm,setSearchTerm] = useState('')
     const navigate = useNavigate();
+   
 
     const handleSubmit = (e) =>{
         e.preventDefault();
@@ -23,7 +24,10 @@ export default function Header() {
         if(searchTermFromUrl){
             setSearchTerm(searchTermFromUrl)
         }
+        console.log(searchTermFromUrl);
     },[location.search])
+
+    
 
 
 
@@ -39,7 +43,8 @@ export default function Header() {
         <form onClick={handleSubmit} className='bg-slate-100 p-3 rounded-lg flex items-center'>
             <input type="text" placeholder='Search...' 
             className='bg-transparent focus:outline-none w-24 sm:w-64'
-            onChange={(e)=>setSearchTerm(e.target.value)} />
+            onChange={(e)=>setSearchTerm(e.target.value)}
+            value={searchTerm} />
             <button>
             <FaSearch className='text-slate-600'/>
             </button>
